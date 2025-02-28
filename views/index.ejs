@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+    <title>Jokes</title>
+
+</head>
+<body>
+    <h1><%= content %></h1>
+    <div>
+        <form id="jokeForm" method="post">
+            <h2>Select category: </h2>
+            <input type="radio" id="any" name="category" value="Any" >
+            <label for="any">Any</label><br>
+            <input type="radio" id="programming" name="category" value="Programming">
+            <label for="programming">Programming</label><br>
+            <input type="radio" id="miscellaneous" name="category" value="Misc">
+            <label for="miscellaneous">Miscellaneous</label><br>
+            <input type="radio" id="dark" name="category" value="Dark">
+            <label for="dark">Dark</label><br>
+
+            <h2>Joke type: </h2>
+            <input type="checkbox" id="single" name="single" value="Single">
+            <label for="single"> Single</label><br>
+            <input type="checkbox" id="twopart" name="twopart" value="Two part">
+            <label for="twopart">Two part</label><br>
+
+            <input id="get" type="submit" value="Make me laugh!" formaction="/get-joke">
+        </form>
+    </div>
+    <div>
+       
+    </div>
+
+</body>
+</html>
