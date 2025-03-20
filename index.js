@@ -15,10 +15,15 @@ app.get("/", async (req, res) => {
 
 app.post("/get-joke", async (req, res) => {
     const category = req.body.category;
+    const type = req.body.type;
     try {
-        let result = await axios.get(API + category + "?idRange=0-318" );
+        let result = await axios.get(API + category + "?type="+ type);
         console.log(result.data);
-        res.render("index.ejs", {content: result.data.joke});        
+        if (result.data.setup) {
+            res.render("index.ejs", {content: result.data.setup, delivery: result.data.delivery});   
+        } else {
+            res.render("index.ejs", {content: result.data.joke});
+        }        
     } catch (error) {
         console.log(error.response.data);
         res.render("index.ejs", {content: error});
