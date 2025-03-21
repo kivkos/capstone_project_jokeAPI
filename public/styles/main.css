@@ -1,24 +1,64 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap');
+
 body {
-    min-height: 100vh;
-    background: lightblue;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+    background: #00afb9;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    width: 70%;
+    align-content: center;
   }
 
   h1 {
-    color: rgb(65, 64, 64);
-    font-family: 'Lucida Sans', Verdana, sans-serif;
+    color: #fdfcdc;
+    font-family: "Winky Sans", sans-serif;
   }
-
-  #get {
-    width: 7em;
-    height: 5em;
+button {
+    background-color: #0081a7;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: "Winky Sans", sans-serif;
+    font-size: 1rem;
+    margin: 4px 2px;
+    cursor: pointer;
     border: none;
-    opacity: 5;
-
+    border-radius: 3%;
   }
 
+  button:hover {
+    background-color: #89c2d9;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
+  }
+ 
+  img {
+    height: 100%;
+    width: 80%;
+    object-fit: cover;
+    border-radius: 30%;
+    box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.5);
+    }
+
+  .items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Winky Sans", sans-serif;
+  }
+
+  .joke {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+  }

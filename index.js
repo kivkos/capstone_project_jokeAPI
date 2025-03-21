@@ -10,20 +10,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
-    res.render("index.ejs", {content: "Hello! Let's brighten up your day! 😅 "})
+    res.render("index.ejs", {joke: "Hello! Let's brighten up your day! 😅 ", delivery: ""})
 });
 
 app.post("/get-joke", async (req, res) => {
     const category = req.body.category;
-    const type = req.body.type;
+    const type = req.body.single ? "single" : req.body.twopart ? "twopart" : "" ;
     try {
-        let result = await axios.get(API + category + "?type="+ type);
+        let url =`${API}${category}` ;
+        if (type) url += `?type=${type}`
+        let result = await axios.get(url);
         console.log(result.data);
-        if (result.data.setup) {
-            res.render("index.ejs", {content: result.data.setup, delivery: result.data.delivery});   
+
+        if (result.data.type === "twopart") {
+            res.render("index.ejs", {joke: result.data.setup, delivery: result.data.delivery});   
         } else {
-            res.render("index.ejs", {content: result.data.joke});
-        }        
+            res.render("index.ejs", {joke: result.data.joke, delivery: "" });
+        }      
     } catch (error) {
         console.log(error.response.data);
         res.render("index.ejs", {content: error});

@@ -6,48 +6,77 @@
     <link rel="stylesheet" type="text/css" href="styles/main.css">
     <title>Jokes</title>
 </head>
-
 <body>
-    <div>
-        <% if (content!==null) { %> 
-        <h1> <%= content %> </h1>  
-        <% } else { %>
-        <h1>Nema ništa </h1>
-         <% } %>
-    </div>   
-    
-    <div>
-        <form id="jokeForm" method="post">
-            <h2>Select category: </h2>
-            <input type="radio" id="any" name="category" value="Any" che >
-            <label for="any">Any</label><br>
-            <input type="radio" id="programming" name="category" value="Programming">
-            <label for="programming">Programming</label><br>
-            <input type="radio" id="miscellaneous" name="category" value="Misc">
-            <label for="miscellaneous">Miscellaneous</label><br>
-            <input type="radio" id="dark" name="category" value="Dark">
-            <label for="dark">Dark</label><br>
+    <div class="grid-container">
+        <div class="items joke">
+            <% if (joke) { %> 
+                <h1> <%= joke %> </h1>  
+            <% }  %>
+            <% if (delivery) { %> 
+                <h2> - <%= delivery %> </h2>  
+            <% }  %>
+        </div>
+        <div class="items">
+            <form id="jokeForm" method="post">
+                <h3>Select category: </h3>
+                <input type="radio" id="any" name="category" value="Any" >
+                <label for="any">Any</label><br>
+                <input type="radio" id="programming" name="category" value="programming">
+                <label for="programming">Programming</label><br>
+                <input type="radio" id="miscellaneous" name="category" value="miscellaneous">
+                <label for="miscellaneous">Miscellaneous</label><br>
+                <input type="radio" id="dark" name="category" value="dark">
+                <label for="dark">Dark</label><br>
 
-            <h2>Joke type: </h2>
-            <input type="checkbox" id="single" name="type" value="single">
-            <label for="single"> Single</label><br>
-            <input type="checkbox" id="twopart" name="type" value="twopart">
-            <label for="twopart">Two part</label><br>
+                <h3>Joke type: </h3>
+                <input type="checkbox" id="single" name="single" value="single">
+                <label for="single"> Single</label><br>
+                <input type="checkbox" id="twopart" name="twopart" value="twopart">
+                <label for="twopart">Two part</label><br>
+                <br>                
 
-            <input id="get" type="submit" value="Make me laugh!" formaction="/get-joke">
-        </form>
+                <button id="get" type="submit" value="Make me laugh!" formaction="/get-joke">Make me laugh!</button>
+            </form>
+        </div>
+        
+        <div class="items">
+            <img id="categoryImage" src="/images/people.jpg" alt="people smiling"> 
+        </div>
+        <div>
+            
+        </div>
     </div>
 
     <script>
-        document.getElementById("jokeForm").addEventListener("submit", function() {
-            setTimeout(() => {
-                location.reload(); // Force reload after submitting the form
-            }, 500);
-        });
 
-        function ispis() => {
-            if (content!== null) 
-            alert("ok");
+        document.addEventListener("DOMContentLoaded", function() {
+
+            let categoryImage = document.getElementById("categoryImage");
+            let previousSelection = localStorage.getItem("selectedCategory");
+
+            if (previousSelection) {
+                
+                let selectedRadio = document.querySelector(`input[name="category"][value=${previousSelection}]`);
+                if (selectedRadio) {
+                    selectedRadio.checked = true;
+                }
+            }
+            updateImage(previousSelection);
+        })
+
+        document.getElementById("jokeForm").addEventListener("submit", function() {
+            let selectedCategory = document.querySelector('input[name="category"]:checked').value;
+            localStorage.setItem("selectedCategory", selectedCategory);
+        })
+
+        function updateImage(category) {
+            if (category === "programming") {
+                categoryImage.src = "/images/programming.jpg";
+            } else if (category === "dark") {
+                categoryImage.src = "/images/dark.gif";
+            } else {
+                categoryImage.src = "/images/people.jpg";
+            }
         }
         
     </script>
